@@ -27,7 +27,9 @@ install_tool() {
 
   echo "Downloading [${binary_name}] from ${download_url} to ${download_path}"
   curl -Lo "$download_path" "$download_url"
+  echo "==================="
   ls -alFrt $download_path
+  echo "==================="
 
   echo "Creating bin directory"
   mkdir -p "${bin_install_path}"
@@ -49,7 +51,12 @@ get_binary_path_in_archive() {
   local version=$3
   local platform=$4
 
-  echo "${archive_dir}/$binary_name"
+  case "${OSTYPE}" in
+    linux*) echo "${archive_dir}/${binary_name}" ;;
+    darwin*) echo "${archive_dir}/${binary_name}-darwin" ;;
+    msys|windows*) echo "${archive_dir}/${binary_name}.exe" ;;
+    *) fail "Unsupported platform" ;;
+  esac
 }
 
 get_filename() {
