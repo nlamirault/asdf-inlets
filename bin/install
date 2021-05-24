@@ -27,9 +27,6 @@ install_tool() {
 
   echo "Downloading [${binary_name}] from ${download_url} to ${download_path}"
   curl -Lo "$download_path" "$download_url"
-  echo "==================="
-  ls -alFrt $download_path
-  echo "==================="
 
   echo "Creating bin directory"
   mkdir -p "${bin_install_path}"
