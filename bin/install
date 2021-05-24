@@ -57,7 +57,7 @@ get_filename() {
   # local version_short
   # version_short=$(echo "$version" | tr -d "v")
 
-  echo "${binary_name}.tar.gz"
+  echo "${binary_name}.tgz"
 }
 
 # Linux: https://github.com/inlets/inletsctl/releases/download/0.8.4/inletsctl.tgz
