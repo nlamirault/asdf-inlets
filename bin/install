@@ -46,10 +46,6 @@ get_binary_path_in_archive() {
   echo "${archive_dir}/$binary_name"
 }
 
-get_platform() {
-  
-}
-
 get_filename() {
   local version="$1"
   local platform="$2"
