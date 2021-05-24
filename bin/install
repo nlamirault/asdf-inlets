@@ -3,6 +3,11 @@
 set -e
 set -o pipefail
 
+fail() {
+  echo -e "\e[31mFail:\e[m $*"
+  exit 1
+}
+
 install_tool() {
   #local install_type=$1
   local version=$2
@@ -20,6 +25,7 @@ install_tool() {
   download_url=$(get_download_url "$version" "$binary_name")
   download_path="$tmp_download_dir/"$(get_filename "$binary_name")
 
+  echo "OS: ${OSTYPE}"
   echo "Downloading [${binary_name}] from ${download_url} to ${download_path}"
   curl -Lo "$download_path" "$download_url"
 
@@ -55,10 +61,10 @@ get_filename() {
   # version_short=$(echo "$version" | tr -d "v")
 
   echo "${binary_name}.tgz"
-  case "$OSTYPE" in
+  case "${OSTYPE}" in
     linux*) echo "${binary_name}.tgz" ;;
     darwin*) echo "${binary_name}-darwin.tgz" ;;
-    windows*) echo "${binary_name}.exe.tgz" ;;
+    msys|windows*) echo "${binary_name}.exe.tgz" ;;
     *) fail "Unsupported platform" ;;
   esac
 }
